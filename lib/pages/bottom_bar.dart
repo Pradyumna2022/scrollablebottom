@@ -73,23 +73,31 @@ class _BottomBarState extends State<BottomBar> {
             ),
           ),
           AnimatedPositioned(
+            // curve: Curves.ease,
             duration: Duration(milliseconds: 600),
-            bottom: _isVisible ? 0.0 : -kBottomNavigationBarHeight,
-            left: 0,
-            right: 0,
+            bottom: _isVisible ? 10 : -kBottomNavigationBarHeight,
+            left: 10,
+            right: 10,
             child: AnimatedOpacity(
               duration: Duration(milliseconds: 600),
               opacity: _isVisible ? 1.0 : 0.0,
-              child: BottomNavigationBar(
-                showSelectedLabels: false,
-                showUnselectedLabels: false,
-                currentIndex: selectedIndex,
-                onTap: (newIndex) {
-                  setState(() {
-                    selectedIndex = newIndex;
-                  });
-                },
-                items: bottomBarItems(),
+              child: Container(
+                clipBehavior: Clip
+                    .hardEdge, //or better look(and cost) using clip.antialias,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: BottomNavigationBar(
+                  // showSelectedLabels: false,
+                  // showUnselectedLabels: false,
+                  currentIndex: selectedIndex,
+                  onTap: (newIndex) {
+                    setState(() {
+                      selectedIndex = newIndex;
+                    });
+                  },
+                  items: bottomBarItems(),
+                ),
               ),
             ),
           ),
@@ -101,19 +109,19 @@ class _BottomBarState extends State<BottomBar> {
   List<BottomNavigationBarItem> bottomBarItems() {
     return [
       BottomNavigationBarItem(
-        label: '',
+        label: 'Home',
         icon: Icon(Icons.home, color: Colors.white),
       ),
       BottomNavigationBarItem(
-        label: '',
+        label: 'Plan',
         icon: Icon(Icons.track_changes, color: Colors.white),
       ),
       const BottomNavigationBarItem(
-        label: '',
+        label: 'Message',
         icon: const Icon(Icons.messenger_outline_rounded, color: Colors.white),
       ),
       const BottomNavigationBarItem(
-        label: '',
+        label: 'Profile',
         icon: const Icon(Icons.person, color: Colors.white),
       ),
     ];
